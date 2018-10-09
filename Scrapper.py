@@ -37,17 +37,17 @@ half_urls_of_albums=get_album_urls(urls_of_pages)
 urls_of_albums=["https://www.xiami.com"+s for s in half_urls_of_albums]
 def get_comment(urls):
     for url in urls:
-        ##driver = webdriver.Safari()
-        ##driver.maximize_window()
-        ##driver.get(url)
-        req=request.Request(url,headers=headers)
-        html=urlopen(req)
-        ##time.sleep(2)
-        ##bsObj=BeautifulSoup(driver.page_source,"html.parser")
+        driver = webdriver.Safari()
+        driver.maximize_window()
+        driver.get(url)
+        ##req=request.Request(url,headers=headers)
+        ##html=urlopen(req)
+        time.sleep(2)
+        bsObj=BeautifulSoup(driver.page_source,"html.parser")
         bsObj=BeautifulSoup(html.read(),"html.parser")
         bs = bsObj.findAll(attrs={"class":"brief"})
         comment_in_a_page = []
         for bs1 in bs:
             comment_in_a_page.append(bs1.get_text().replace('\n','').replace('\t','').replace(' ',''))
-        ##driver.close()
+        driver.close()
     return comment_in_a_page
